@@ -44,5 +44,5 @@ function p = noiseLaplace(ny,nx,a)
     
     p = (p-mean(p,"all"))/std(p,1,"all");
     
-    laplacePlot(ny,nx,p,it);
+    noisePlot(ny,nx,p,it);
 end

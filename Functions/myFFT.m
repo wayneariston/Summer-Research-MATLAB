@@ -6,8 +6,8 @@ function Q = myFFT(P, nm, dip, diam)
     
     % ellipse to create a low-pass filter
     if nargin>3
-        eh = sp(1)/(diam/2); % ellipse height
-        el = sp(2)/(diam/2); % ellipse length
+        eh = sp(1)/(diam); % ellipse height
+        el = sp(2)/(diam); % ellipse length
         ey = ceil(sp(1)/2); % ellipse center y
         ex = ceil(sp(2)/2); % ellipse center x
         [x,y] = meshgrid(1:sp(2),1:sp(1));
@@ -33,8 +33,8 @@ function Q = myFFT(P, nm, dip, diam)
         dip = [0.65 1];
     end
     
-    sec_max = min(maxk(max(Q1),2)); % for scaling the colorbar
-    imagesc(-sp(1)/2,-sp(2)/2,Q1, sec_max*dip);
+    sec_max = min(maxk(max(Q2,[],"omitnan"),2)); % for scaling the colorbar
+    imagesc(-sp(2)/2,-sp(1)/2,Q1, sec_max*dip);
     colormap(flipud(gray));
     set(gca,"YDir","normal");
     axis equal tight

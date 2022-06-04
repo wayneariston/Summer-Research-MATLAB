@@ -1,4 +1,4 @@
-function laplacePlot(h,l,z,it,maxf)
+function noisePlot(h,l,z,it,maxf)
     x = 1:l;
     y = 1:h;
     surf(x,y,z,'EdgeColor','none');       
@@ -15,5 +15,5 @@ function laplacePlot(h,l,z,it,maxf)
     set(gca,"YDir","reverse")
     colormap jet;
     colorbar("Location","southoutside")
-    axis square tight
+    axis equal tight
 end
