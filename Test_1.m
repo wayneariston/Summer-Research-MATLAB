@@ -6,6 +6,14 @@ lambda = 3; % [rad atom^-1]
 % lambda should be <<1, but not too small as well
 lambda = lambda*2*pi/atom_diameter;
 
+if image_length-2*ceil(2.58/lambda)<=0 && image_height-2*ceil(2.58/lambda)<=0
+    error("No pixels without padded zeros remain.");
+else
+    npixel = (image_length-2*ceil(2.58/lambda))*(image_height-2*ceil(2.58/lambda));
+    % the number of pixels averaged
+    disp("Number of pixels averaged: " + npixel + " (" + npixel/(image_length*image_height)*100 + "%)");
+end
+
 Q_x = [1 0];
 Q_y = [-Q_x(2) Q_x(1)]; % just to ensure orthogonality
 Q_x = Q_x * 2*pi / (norm(Q_x)*atom_diameter); % [rad atom^-1]

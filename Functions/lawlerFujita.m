@@ -1,7 +1,21 @@
-function blat = lawlerFujita(lat,qx,qy,lamb)
-    blat = zeros(size(lat));
+function blat = lawlerFujita(lat,qx,qy,lamb,fast)
     sp = size(lat);
     [x,y] = meshgrid(1:sp(2),1:sp(1));
+    
+    if nargin>4
+        if fast
+            z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
+            z = ceil(z/lamb);
+            sp = 2*z*[1 1];
+            convMode = 'valid';
+            blat = zeros(size(lat)-sp+[1 1]);
+        else
+            error("What am I supposed to do? -lawlerFujita()");
+        end
+    else
+        convMode = 'same';
+        blat = zeros(sp);
+    end
     
     % define the Gaussian
     G = fspecial('gaussian',[sp(1) sp(2)],1/lamb);
@@ -11,12 +25,13 @@ function blat = lawlerFujita(lat,qx,qy,lamb)
     Fy = lat.*exp(-1i*(qy(1)*x+qy(2)*y));
     
     % convolve the functions
-    lat_x = conv2(Fx,G,'same');
-    lat_y = conv2(Fy,G,'same');
+    lat_x = conv2(Fx,G,convMode);
+    lat_y = conv2(Fy,G,convMode);
     
     % same with all the functions, note the vector representations of qx and qy
     pa = -unwrap(angle(lat_x*2));
     pb = -unwrap(angle(lat_y*2));
+    
     blat(:,:,1) = (pa*qy(2)-pb*qx(2))./(qx(1)*qy(2)-qy(1)*qx(2));
     blat(:,:,2) = (pa*qy(1)-pb*qx(1))./(qx(2)*qy(1)-qy(2)*qx(1));
 end
