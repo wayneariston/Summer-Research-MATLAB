@@ -29,8 +29,8 @@ function blat = lawlerFujita(lat,qx,qy,lamb,fast)
     lat_y = conv2(Fy,G,convMode);
     
     % same with all the functions, note the vector representations of qx and qy
-    pa = -unwrap(angle(lat_x*2));
-    pb = -unwrap(angle(lat_y*2));
+    pa = -unwrap(unwrap(angle(lat_x*2)),[],2);
+    pb = -unwrap(unwrap(angle(lat_y*2)),[],2);
     
     blat(:,:,1) = (pa*qy(2)-pb*qx(2))./(qx(1)*qy(2)-qy(1)*qx(2));
     blat(:,:,2) = (pa*qy(1)-pb*qx(1))./(qx(2)*qy(1)-qy(2)*qx(1));

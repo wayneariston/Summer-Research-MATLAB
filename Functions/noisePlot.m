@@ -6,7 +6,7 @@ function noisePlot(h,l,z,it,maxf)
     if nargin<5
         title({'Simulated physical distortion by Laplace''s equation';['{\itNumber of iterations} = ',num2str(it)]})
     else
-        maxf = max(h,l)/(maxf/2);
+        maxf = max(h,l)/maxf;
         title({'Simulated physical distortion after low-pass filter';['{\itMaximum frequency} = ',num2str(maxf)]})
     end
     xlabel('$x$ [pixel]',"Interpreter","latex")

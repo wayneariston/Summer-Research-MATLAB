@@ -1,4 +1,4 @@
-function uComboPlot(u,ucalc)
+function uComboPlot(u,ucalc,lamb)
     figure;
     subplot(2,2,1);
     uPlot(u,"$u$");
@@ -9,6 +9,16 @@ function uComboPlot(u,ucalc)
     subplot(2,2,4);
     colormap(jet);
     imagesc(sqrt(((ucalc(:,:,1)-u(:,:,1)).^2+(ucalc(:,:,2)-u(:,:,2)).^2)./(u(:,:,1).^2+u(:,:,2).^2)),[0.0001 1]);
+    hold on
+    if nargin>2
+        [h,l,~] = size(u);
+        z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
+        z = ceil(z/lamb);
+        line([z h-z], [z z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([z h-z], [l-z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([z z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([h-z h-z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+    end
     title("The magnitude of $(u-u_{calc})/|u|$","Interpreter","latex");
     xlabel("$x$ [pixel]","Interpreter","latex");
     ylabel("$y$ [pixel]","Interpreter","latex");
@@ -16,6 +26,7 @@ function uComboPlot(u,ucalc)
     axis image
     c = colorbar;
     c.Label.String = "Relative error";
+    hold off
     figure;
 end
 
