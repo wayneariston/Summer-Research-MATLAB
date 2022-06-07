@@ -23,7 +23,7 @@ for mag = [0.1:0.1:1 1.25:0.25:2]
     for maxl = [1 2 5 10 15] % depends on image size/atom size
         tic
         disp("Calculating maxl " + maxl + "d, mag " + mag + "d");
-        meanErr = zeros(1);
+        meanErr = zeros(1,100);
         for ctr = 1:100
             noise = noiseCreate(image_height,image_length,atom_diameter,maxl,mag); % the last two are the parameters of interest
             u = uCreate(image_height,image_length);
@@ -40,7 +40,7 @@ for mag = [0.1:0.1:1 1.25:0.25:2]
         xlabel("absolute error [pixel]");
         ylabel("frequency");
         hold off
-        saveas(gcf,"maxl " + maxl + ", mag " + mag + ".fig");
+%         saveas(gcf,"maxl " + maxl + ", mag " + mag + ".fig");
         toc
     end
 end

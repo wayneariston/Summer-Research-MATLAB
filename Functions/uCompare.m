@@ -1,4 +1,4 @@
-function [mu, sigma, allzero] = uCompare(u,ucalc,lamb,fast)
+function [mu, sigma] = uCompare(u,ucalc,lamb,fast)
     allzero = "";
     [h,l,~] = size(u);
     z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
@@ -19,7 +19,7 @@ function [mu, sigma, allzero] = uCompare(u,ucalc,lamb,fast)
     mu = mean(rel,"all","omitnan");
     sigma = std(rel,1,"all","omitnan");
     if all(isnan(mu))
-        allzero = "WARNING! All zero";
+        warning("All magnitudes of u are zero. Taking absolute error.");
         mu = mean(diffmag,"all");
         sigma = std(diffmag,1,"all");
     end

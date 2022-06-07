@@ -1,4 +1,4 @@
-for ell = 0.2
+for ell = 0.05
     disp("Calculation for lambda = " + ell);
     tic
     image_length = 256;
@@ -23,12 +23,13 @@ for ell = 0.2
     Q_y = Q_y * 2*pi / (norm(Q_y)*atom_diameter); % [rad atom^-1]
 
     inputs = [1 zeros(1,5)];
-    meanErr = zeros(1);
+    skip = 0.1;
+    lims = 0:skip:10;
+    meanErr = zeros(1,round(1/skip)+1);
     
     figure;
     
     for ctr = 1:6
-        lims = 0:0.01:1;
         for a = lims
             % create a displacement vector field
             u = uCreate(image_height,image_length,atom_diameter,...
@@ -44,8 +45,8 @@ for ell = 0.2
             lattice1 = normies(uTransform(u,Q_x,Q_y))*atom_diameter/2;
 
             % calculate for the vector field using the Lawler-Fujita algorithm
-            ucalc = lawlerFujita(lattice1,Q_x,Q_y,lambda,true);
-            [meanErr(round(a*100)+1), stdErr, ouah] = uCompare(u,ucalc,lambda,true);
+            ucalc = lawlerFujita(lattice1,Q_x,Q_y,lambda);
+            [meanErr(round(a/skip)+1), stdErr] = uCompare(u,ucalc,lambda);
             % add "true" as last parameter to do fast convolution
             % for both lawlerFujita() and uCompare()
         end

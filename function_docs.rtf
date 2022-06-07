@@ -1,0 +1,117 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fnil\fcharset0 AndaleMono;
+\f3\fswiss\fcharset0 Helvetica-Oblique;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs40 \cf0 Functions documentation\
+
+\fs24 \
+
+\f1\b The big ones
+\f0\b0 \
+\pard\pardeftab720\sb30\sa135\partightenfactor0
+
+\f2\fs21 \cf0 Q = myFFT(P, nm, dip, diam)
+\f0  \'97
+\f3\i  Q is the fft; P is the image; nm is the title; dip=[0.65 1] [optional] sets the limits of the colorbar where 1 is the value of the second highest peak; diam [optional] is the atom diameter which sets the maximum frequency for the low-pass filter\
+\pard\pardeftab720\partightenfactor0
+
+\f2\i0 \cf0 s = uCreate(h,l,diam,drift,hyst,creep)
+\f0  \'97
+\f3\i  s is the vector field; h, l are the matrix dimensions; diam=0 [optional] specifies the magnitude of the vectors in terms of the lattice constant; drift=hyst=creep[0,0] [optional] specifies the maximum magnitude of the vectors all in terms of the lattice constant. See the presentation "progress report 1" for the equations defining each type of distortion\
+\pard\pardeftab720\sb30\sa135\partightenfactor0
+
+\f2\i0 \cf0 P = uTransform(s,qx,qy)
+\f0  \'97
+\f3\i  P is the image matrixl s is the vector field; qx, qy are the lattice wavevectors\
+
+\f2\i0 blat = myConv(lat,qx,qy,lamb)
+\f0  \'97
+\f3\i  blat is the vector field result of the convolution; lat is the image matrix; qx, qy are the lattice wavevectors; lamb is in Lawler et al. (2010)'s supplementary information paper
+\f0\i0 \
+
+\f2 p = noiseLaplace(ny,nx,a)
+\f0  \'97 
+\f3\i p is the output noise; ny, nx are the dimensions of the image; a is the atom radius\
+\pard\pardeftab720\partightenfactor0
+
+\f2\i0 \cf0 nc = noiseCreate(h,l,diam,minlength,mag) 
+\f0 \'97 
+\f3\i nc is the output noise; h,l are the dimensions of the image; diam is the lattice constant; minlength is the minimum length of a bulge in diams; mag=1 [optional] is the standard deviation of the noise magnitudes in diams\
+\pard\pardeftab720\sb30\sa135\partightenfactor0
+
+\f2\i0 \cf0 p = noiseLaplace(ny,nx,a)
+\f0  \'97 
+\f3\i p is the output noise; ny, nx are the dimensions of the image; a is the atom radius\
+\pard\pardeftab720\partightenfactor0
+
+\f2\i0 \cf0 [mu, sigma, allzero] = uCompare(u,ucalc,lamb,fast) 
+\f0 \'97 
+\f3\i mu, sigma, are the mean and standard deviation of the relative magnitudes of u\'96ucalc; allzero is a string that warns for which all of u is zero and mu and sigma are not relative errors; u and ucalc are the vector fields to be compared; lamb is the coarsening factor in Lawler et al. (2010)'s supplementary information paper; fast=false [optional], replace with true to do a faster version of 
+\f2\i0 uCompare()
+\f3\i \
+\pard\pardeftab720\sb30\sa135\partightenfactor0
+
+\fs24 \cf0 Optimized big ones\
+\pard\pardeftab720\partightenfactor0
+
+\f2\i0\fs21 \cf0 blat = lawlerFujita(lat,qx,qy,lamb,fast)
+\f0  \'97 
+\f3\i blat is the vector field result of the convolution; lat is the image matrix; qx, qy are the lattice wavevectors; lamb is in Lawler et al. (2010)'s supplementary information paper; fast=false [optional], replace with true to do a faster version of 
+\f2\i0 myConv()\
+Q = myFFTnp(P,diam) 
+\f0 \'97
+\f3\i  Q is the fft; P is the image; nm is the title. Just like 
+\f2\i0 myFFT()
+\f3\i  but without plotting\
+\pard\pardeftab720\partightenfactor0
+
+\f4\i0\fs24 \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\i\fs21 \cf0 \
+\pard\pardeftab720\sb30\sa135\partightenfactor0
+\cf0 \
+\pard\pardeftab720\sb30\sa135\partightenfactor0
+
+\f1\i0\b\fs24 \cf0 Plotting
+\fs21 \
+\pard\pardeftab720\sb30\sa135\partightenfactor0
+
+\f2\b0 \cf0 latticePlot(P0,nm1,r,num)
+\f0  \'97 
+\f3\i P0 is the image (uint8); nm1 is the title; r [optional], num=8 [optional] specify the view\
+
+\f2\i0 comboPlot(P0, nm, a) 
+\f0 \'97 
+\f3\i  P0 is the image (uint8); nm1 is the title; a is the atom diameter\
+
+\f2\i0 uPlot(s,nm)
+\f0  \'97
+\f3\i  s is the vector field; nm is the title\
+
+\f2\i0 convPlot(lat,nm)
+\f0  \'97
+\f3\i  lat is the image lattice; nm is the title\
+
+\f2\i0 uComboPlot(u,ucalc) 
+\f0 \'97
+\f3\i  u is the known vector field; ucalc is the calculated vector field\
+
+\f2\i0 noisePlot(h,l,z,it,maxf)
+\f0  \'97
+\f3\i  h,l are matrix dimensions; z is intensity
+\f0\i0 ;
+\f3\i  it [optional] is the number of iterations; maxf [optional] is the maximum frequency\
+\
+\pard\pardeftab720\sb30\sa135\partightenfactor0
+
+\f1\i0\b \cf0 Miscellaneous\
+\pard\pardeftab720\sb30\sa135\partightenfactor0
+
+\f2\b0 \cf0 A = normies(A, lim)
+\f0  \'97
+\f3\i  A is the matrix; lim=[-1 1] [optional] are the limits}
