@@ -1,10 +1,12 @@
-function blat = lawlerFujita(lat,qx,qy,lamb,fast)
+function blat = lawlerFujita(lat,qx,qy,lamb,z,fast)
     sp = size(lat);
     [x,y] = meshgrid(1:sp(2),1:sp(1));
     
-    if nargin>4
+    if nargin>5
         if fast
-            z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
+            if isempty(z)
+                z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
+            end
             z = ceil(z/lamb);
             sp = 2*z*[1 1];
             convMode = 'valid';

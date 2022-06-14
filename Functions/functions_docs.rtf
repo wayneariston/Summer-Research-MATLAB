@@ -1,0 +1,124 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fnil\fcharset0 AndaleMono;
+\f3\fswiss\fcharset0 Helvetica-Oblique;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww34200\viewh27180\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sa120\pardirnatural\partightenfactor0
+
+\f0\fs40 \cf0 Functions documentation\
+
+\fs24 \
+
+\f1\b The big ones
+\f0\b0 \
+\pard\pardeftab720\sa120\partightenfactor0
+
+\f2\fs21 \cf0 Q = myFFT(P, nm, dip, diam)
+\f0  \'97
+\f3\i  Q is the fft; P is the image; nm is the title; dip=[0.65 1] [optional] sets the limits of the colorbar where 1 is the value of the second highest peak; diam [optional] is the atom diameter which sets the maximum frequency for the low-pass filter\
+
+\f2\i0 s = uCreate(h,l,diam,drift,hyst,creep)
+\f0  \'97
+\f3\i  s is the vector field; h, l are the matrix dimensions; diam=0 [optional] specifies the magnitude of the vectors in terms of the lattice constant; drift=hyst=creep[0,0] [optional] specifies the maximum magnitude of the vectors all in terms of the lattice constant. See the presentation "progress report 1" for the equations defining each type of distortion\
+
+\f2\i0 P = uTransform(s,qx,qy)
+\f0  \'97
+\f3\i  P is the image matrixl s is the vector field; qx, qy are the lattice wavevectors\
+
+\f2\i0 blat = myConv(lat,qx,qy,lamb,z,~)
+\f0  \'97
+\f3\i  blat is the vector field result of the convolution; lat is the image matrix; qx, qy are the lattice wavevectors; lamb is in Lawler et al. (2010)'s supplementary information paper; add a last parameter to plot the magnitudes of u in x,y instead of the real and imaginary values of each; z=2.85 [optional] is the zscore corresponding to the confidence level
+\f0\i0 \
+
+\f2 p = noiseLaplace(ny,nx,a)
+\f0  \'97 
+\f3\i p is the output noise; ny, nx are the dimensions of the image; a is the atom radius\
+
+\f2\i0 nc = noiseCreate(h,l,diam,minlength,mag) 
+\f0 \'97 
+\f3\i nc is the output noise; h,l are the dimensions of the image; diam is the lattice constant; minlength is the minimum length of a bulge in diams; mag=1 [optional] is the standard deviation of the noise magnitudes in diams\
+
+\f2\i0 p = noiseLaplace(ny,nx,a)
+\f0  \'97 
+\f3\i p is the output noise; ny, nx are the dimensions of the image; a is the atom radius\
+
+\f2\i0 [mu, sigma] = uCompare(u,ucalc,lamb,z,fast) 
+\f0 \'97 
+\f3\i mu, sigma, are the mean and standard deviation of the relative magnitudes of u\'96ucalc; allzero is a string that warns for which all of u is zero and mu and sigma are not relative errors; u and ucalc are the vector fields to be compared; lamb is the coarsening factor in Lawler et al. (2010)'s supplementary information paper; z=2.85 [optional] is the zscore corresponding to the confidence level; fast=false [optional], replace with true to do a faster version of 
+\f2\i0 uCompare()
+\f3\i \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f4\i0\fs20 \cf0 [fitresult, gof, output] = createFit(ucalcz, lamb, z) 
+\f0\fs21 \'97 
+\f3\i fitresult,gpf, output are outputs of MATLAB's built-in 
+\f2\i0 fit()
+\f3\i  function; ucalcz is the scalar field to be fitted; lamb is in Lawler et al. (2010)'s supplementary information paper; z=2.85 [optional] is the zscore corresponding to the confidence level
+\fs24 \
+\pard\pardeftab720\sa120\partightenfactor0
+\cf0 \
+Optimized big ones\
+
+\f2\i0\fs21 blat = lawlerFujita(lat,qx,qy,lamb,z,fast)
+\f0  \'97 
+\f3\i blat is the vector field result of the convolution; lat is the image matrix; qx, qy are the lattice wavevectors; lamb is in Lawler et al. (2010)'s supplementary information paper; z=2.85 [optional] is the zscore corresponding to the confidence level; fast=false [optional], replace with true to do a faster version of 
+\f2\i0 myConv()\
+Q = myFFTnp(P,diam) 
+\f0 \'97
+\f3\i  Q is the fft; P is the image; nm is the title. Just like 
+\f2\i0 myFFT()
+\f3\i  but without plotting\
+\
+\
+
+\f1\i0\b\fs24 Plotting
+\fs21 \
+
+\f2\b0 latticePlot(P0,nm1,r,num)
+\f0  \'97 
+\f3\i P0 is the image (uint8); nm1 is the title; r [optional], num=8 [optional] specify the view\
+
+\f2\i0 comboPlot(P0, nm, a) 
+\f0 \'97 
+\f3\i  P0 is the image (uint8); nm1 is the title; a is the atom diameter\
+
+\f2\i0 uPlot(s,nm)
+\f0  \'97
+\f3\i  s is the vector field; nm is the title\
+
+\f2\i0 convPlot(lat,nm,lat1,z)
+\f0  \'97
+\f3\i  lat is the complex value for Tx or Ty, if lat1=[]. else, lat is the magnitude of u on x; nm is the title; lat1 [optional] is the magnitude of u on y; z=2.85 [optional] is the zscore corresponding to the confidence level\
+
+\f2\i0 uComboPlot(u,ucalc,z) 
+\f0 \'97
+\f3\i  u is the known vector field; ucalc is the calculated vector field; z=2.85 [optional] is the zscore corresponding to the confidence level\
+
+\f2\i0 noisePlot(h,l,z,it,maxf)
+\f0  \'97
+\f3\i  h,l are matrix dimensions; z is intensity
+\f0\i0 ;
+\f3\i  it [optional] is the number of iterations; maxf [optional] is the maximum frequency\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f2\i0 \cf0 fitPlot(fitresult, zData, nm, lamb, z) 
+\f0 \'97
+\f3\i  fitresult is the output of 
+\f2\i0 createFit()
+\f3\i ; zData is the "prepared" scalar field
+\f0\i0 ;
+\f3\i  nm is the title; lamb is in Lawler et al. (2010)'s supplementary information paper; z=2.85 [optional] is the zscore corresponding to the confidence level\
+\pard\pardeftab720\sa120\partightenfactor0
+\cf0 \
+
+\f1\i0\b Miscellaneous\
+
+\f2\b0 A = normies(A, lim)
+\f0  \'97
+\f3\i  A is the matrix; lim=[-1 1] [optional] are the limits\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f4\i0\fs20 \cf0 z = zscorer(p) 
+\f0\fs21 \'97
+\f3\i  z is the output zscore; p is the confidence level 0<=p<=1}

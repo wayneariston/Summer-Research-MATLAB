@@ -1,4 +1,4 @@
-function uComboPlot(u,ucalc,lamb)
+function uComboPlot(u,ucalc,lamb,z)
     figure;
     subplot(2,2,1);
     uPlot(u,"$u$");
@@ -12,7 +12,9 @@ function uComboPlot(u,ucalc,lamb)
     hold on
     if nargin>2
         [h,l,~] = size(u);
-        z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
+        if nargin<4
+            z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
+        end
         z = ceil(z/lamb);
         line([z h-z], [z z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
         line([z h-z], [l-z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");

@@ -17,6 +17,6 @@ function latticePlot(P0,nm1,r,num)
     
     xlabel("$x$ distance [pixel]","Interpreter","latex");
     ylabel("$y$ distance [pixel]","Interpreter","latex");
-    t = title("Intensity plot of " + nm1);
-    t.FontSize = 16;
+    t = title(nm1);
+    t.FontSize = 14;
 end

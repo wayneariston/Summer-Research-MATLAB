@@ -17,12 +17,12 @@ function s = uCreate(h,l,diam,drift,hyst,creep)
     end
     
     % create x and y for spatial dependence
-    [x,y] = meshgrid(1:l,1:h);
+    [x,y] = meshgrid(0:l-1,0:h-1);
     x = x/min(h,l); % normalize the distance
     y = y/min(h,l);
     
     %create t for temporal dependence (like raster scan)
-    t = 1:h*l;
+    t = 0:h*l-1;
     t = reshape(t,[l h])';
     t = t/(h*l); % 1 time unit per l*h pixels (whole image)
     

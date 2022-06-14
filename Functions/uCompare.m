@@ -1,9 +1,10 @@
-function [mu, sigma] = uCompare(u,ucalc,lamb,fast)
-    allzero = "";
+function [mu, sigma] = uCompare(u,ucalc,lamb,z,fast)
     [h,l,~] = size(u);
-    z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
+    if nargin<4 || isempty(z)
+        z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
+    end
     z = ceil(z/lamb);
-    if nargin>3
+    if nargin>4
         if fast
             diffmag = sqrt((u(z:h-z,z:l-z,1)-ucalc(:,:,1)).^2+(u(z:h-z,z:l-z,2)-ucalc(:,:,2)).^2);
             umag = sqrt((u(z:h-z,z:l-z,1)).^2+(u(z:h-z,z:l-z,2)).^2);
