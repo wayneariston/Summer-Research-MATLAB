@@ -15,8 +15,8 @@ function blat = myConv(lat,qx,qy,lamb,z,~)
     lat_y = conv_fft2(Fy,G,'same');
     
     % same with all the functions, note the vector representations of qx and qy
-    pa = -unwrap(unwrap(angle(lat_x*2),[],2));
-    pb = -unwrap(unwrap(angle(lat_y*2),[],2));
+%     pa = -unwrap(unwrap(angle(lat_x*2),[],2));
+%     pb = -unwrap(unwrap(angle(lat_y*2),[],2));
 %     pa = -unwrap(unwrap(angle(lat_x*2)),[],2);
 %     pb = -unwrap(unwrap(angle(lat_y*2)),[],2);
 %     pa = -angle(lat_x*2);
@@ -29,10 +29,8 @@ function blat = myConv(lat,qx,qy,lamb,z,~)
 %     pb = -unwrap(unwrap(unwrap(angle(lat_y*2),[],2)),[],2);
 %     pa = -unwrap(unwrap(unwrap(unwrap(angle(lat_x*2),[],2)),[],2));
 %     pb = -unwrap(unwrap(unwrap(unwrap(angle(lat_y*2),[],2)),[],2));
-%     pa = -angle(lat_x*2);
-%     pb = -angle(lat_y*2);
-%     pa = -unwrapGoldstein(lat_x*2);
-%     pb = -unwrapGoldstein(lat_y*2);
+    pa = -unwrapGoldstein(lat_x*2);
+    pb = -unwrapGoldstein(lat_y*2);
 
     blat(:,:,1) = (pa*qy(2)-pb*qx(2))./(qx(1)*qy(2)-qy(1)*qx(2));
     blat(:,:,2) = (pa*qy(1)-pb*qx(1))./(qx(2)*qy(1)-qy(2)*qx(1));

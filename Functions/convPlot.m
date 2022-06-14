@@ -2,7 +2,11 @@ function convPlot(lat,nm,lat1,lamb,z)
     if nargin>2
         p1 = lat;
         p2 = lat1;
-        t = ["x component", "y component"];
+        if strcmp(nm,"biaxial and uniaxial strain")
+            t = ["$(\partial_xS_x+\partial_yS_y)/2$" "$(\partial_xS_x-\partial_yS_y)/2$"];
+        else
+            t = ["x component", "y component"];
+        end
         cnm = "scalar magnitude [pixel]";
     else
         p1 = real(lat);
@@ -13,20 +17,20 @@ function convPlot(lat,nm,lat1,lamb,z)
 
 
     figure;
-    colormap(gray);
+    colormap(parula);
     subplot(1,2,1);
     imagesc(p1);
-    title(t(1));
+    title(t(1),"Interpreter","latex");
     if nargin>3
         [h,l,~] = size(lat);
         if nargin<5
             z = 2.58;
         end
         z = ceil(z/lamb);
-        line([z h-z], [z z], "LineWidth",0.5, "Color", "r", "LineStyle","-");
-        line([z h-z], [l-z l-z], "LineWidth",0.5, "Color", "r", "LineStyle","-");
-        line([z z], [z l-z], "LineWidth",0.5, "Color", "r", "LineStyle","-");
-        line([h-z h-z], [z l-z], "LineWidth",0.5, "Color", "r", "LineStyle","-");
+        line([z h-z], [z z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([z h-z], [l-z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([z z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([h-z h-z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
         cp1 = p1(z:h-z,z:l-z);
         cp2 = p2(z:h-z,z:l-z);
     else
@@ -40,12 +44,12 @@ function convPlot(lat,nm,lat1,lamb,z)
 %     clim([min(min(p1,p2),[],"all"), max(max(p1,p2),[],"all")]);
     subplot(1,2,2);
     imagesc(p2);
-    title(t(2));
+    title(t(2),"Interpreter","latex");
     if nargin>3
-        line([z h-z], [z z], "LineWidth",0.5, "Color", "r", "LineStyle","-");
-        line([z h-z], [l-z l-z], "LineWidth",0.5, "Color", "r", "LineStyle","-");
-        line([z z], [z l-z], "LineWidth",0.5, "Color", "r", "LineStyle","-");
-        line([h-z h-z], [z l-z], "LineWidth",0.5, "Color", "r", "LineStyle","-");
+        line([z h-z], [z z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([z h-z], [l-z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([z z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([h-z h-z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
     end
     xlabel("$x$ [pixel]","Interpreter","latex");
     ylabel("$y$ [pixel]","Interpreter","latex");
@@ -60,7 +64,7 @@ function convPlot(lat,nm,lat1,lamb,z)
     c = colorbar(pl, 'Location','southoutside');
     c.Label.String = cnm;
     c.Label.Interpreter = "Latex";
-    t = sgtitle("Values of " + nm);
-    t.FontSize = 20;
+    ti = sgtitle("Values of " + nm);
+    ti.FontSize = 20;
     figure;
 end
