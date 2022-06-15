@@ -45,8 +45,8 @@ function Q = myFFT(P, nm, dip, diam)
         xlim([-xyl*2.5 xyl*2.5]); % comment these to view whole Fourier transform
         ylim([-xyl*2.5 xyl*2.5]);
     end
-    xlabel("$x$ axis frequency [pixel$^{-1}$]","Interpreter","latex");
-    ylabel("$y$ axis frequency [pixel$^{-1}$]","Interpreter","latex");
+    xlabel("$x$ frequency [cycles per image length]","Interpreter","latex");
+    ylabel("$y$ frequency [cycles per image height]","Interpreter","latex");
     c.Label.String = "Magnitude of the Fourier Transform [log(8-bit intensity$\cdot$pixel)]";
     c.Label.Interpreter = "Latex";
     t = title("Fourier Transform of image " + nm);
