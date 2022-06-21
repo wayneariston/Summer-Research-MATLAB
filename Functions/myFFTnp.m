@@ -10,7 +10,14 @@ function Q = myFFTnp(P,diam)
         ey = ceil(sp(1)/2); % ellipse center y
         ex = ceil(sp(2)/2); % ellipse center x
         [x,y] = meshgrid(1:sp(2),1:sp(1));
-        ellipse = (x-ex).^2./el^2 + (y-ey).^2./eh^2 <= 1;
-        Q(~fftshift(ellipse)) = 0;
+%         ellipse = (x-ex).^2./el^2 + (y-ey).^2./eh^2 <= 1;
+%         Q(~fftshift(ellipse)) = 0;
+
+        % an asymmetric Gaussian factor is used instead
+        mu = [ex ey];
+        sigma = [el 0; 0 eh];
+        X = [x(:) y(:)];
+        ellipse = reshape(mvnpdf(X,mu,sigma),sp(1),sp(2));
+        Q = fftshift(ellipse).*Q;
     end
 end

@@ -6,14 +6,14 @@ function [mu, sigma] = uCompare(u,ucalc,lamb,z,fast)
     z = ceil(z/lamb);
     if nargin>4
         if fast
-            diffmag = sqrt((u(z:h-z,z:l-z,1)-ucalc(:,:,1)).^2+(u(z:h-z,z:l-z,2)-ucalc(:,:,2)).^2);
+            diffmag = sqrt((u(1+z:h-z,1+z:l-z,1)-ucalc(:,:,1)).^2+(u(1+z:h-z,1+z:l-z,2)-ucalc(:,:,2)).^2);
             umag = sqrt((u(z:h-z,z:l-z,1)).^2+(u(z:h-z,z:l-z,2)).^2);
         else
             error("What am I supposed to do? -uCompare()");
         end
     else
-        diffmag = sqrt((u(z:h-z,z:l-z,1)-ucalc(z:h-z,z:l-z,1)).^2+(u(z:h-z,z:l-z,2)-ucalc(z:h-z,z:l-z,2)).^2);
-        umag = sqrt((u(z:h-z,z:l-z,1)).^2+(u(z:h-z,z:l-z,2)).^2);
+        diffmag = sqrt((u(1+z:h-z,1+z:l-z,1)-ucalc(1+z:h-z,1+z:l-z,1)).^2+(u(1+z:h-z,1+z:l-z,2)-ucalc(1+z:h-z,1+z:l-z,2)).^2);
+        umag = sqrt((u(1+z:h-z,1+z:l-z,1)).^2+(u(1+z:h-z,1+z:l-z,2)).^2);
     end
     rel = diffmag./umag;
     rel(isinf(rel)) = nan;

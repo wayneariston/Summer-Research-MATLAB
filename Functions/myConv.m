@@ -4,7 +4,7 @@ function blat = myConv(lat,qx,qy,lamb,z,~)
     [x,y] = meshgrid(1:sp(2),1:sp(1));
     
     % define the Gaussian
-    G = fspecial('gaussian',[sp(1) sp(2)],1/lamb).*lamb/sqrt(2*pi);
+    G = fspecial('gaussian',[sp(1) sp(2)],1/lamb);
     
     % define the other factors to be convoluted
     Fx = lat.*exp(-1i*(qx(1)*x+qx(2)*y));

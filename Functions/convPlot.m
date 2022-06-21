@@ -27,12 +27,12 @@ function convPlot(lat,nm,lat1,lamb,z)
             z = 2.58;
         end
         z = ceil(z/lamb);
-        line([z h-z], [z z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
-        line([z h-z], [l-z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
-        line([z z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
-        line([h-z h-z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
-        cp1 = p1(z:h-z,z:l-z);
-        cp2 = p2(z:h-z,z:l-z);
+        line([1+z l-z], [1+z 1+z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([1+z l-z], [h-z h-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([1+z 1+z], [1+z h-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([l-z l-z], [1+z h-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        cp1 = p1(1+z:h-z,1+z:l-z);
+        cp2 = p2(1+z:h-z,1+z:l-z);
     else
         cp1 = p1;
         cp2 = p2;
@@ -46,10 +46,10 @@ function convPlot(lat,nm,lat1,lamb,z)
     imagesc(p2);
     title(t(2),"Interpreter","latex");
     if nargin>3
-        line([z h-z], [z z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
-        line([z h-z], [l-z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
-        line([z z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
-        line([h-z h-z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([1+z l-z], [1+z 1+z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([1+z l-z], [h-z h-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([1+z 1+z], [1+z h-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([l-z l-z], [1+z h-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
     end
     xlabel("$x$ [pixel]","Interpreter","latex");
     ylabel("$y$ [pixel]","Interpreter","latex");

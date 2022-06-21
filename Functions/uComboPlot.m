@@ -16,10 +16,10 @@ function uComboPlot(u,ucalc,lamb,z)
             z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
         end
         z = ceil(z/lamb);
-        line([z h-z], [z z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
-        line([z h-z], [l-z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
-        line([z z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
-        line([h-z h-z], [z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([1+z h-z], [1+z 1+z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([1+z h-z], [l-z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([1+z 1+z], [1+z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
+        line([h-z h-z], [1+z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
     end
     title("The magnitude of $(u-u_{calc})/|u|$","Interpreter","latex");
     xlabel("$x$ [pixel]","Interpreter","latex");
