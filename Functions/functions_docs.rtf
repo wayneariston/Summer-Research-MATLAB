@@ -4,7 +4,7 @@
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh15100\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sa120\pardirnatural\partightenfactor0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl360\slmult1\pardirnatural\partightenfactor0
 
 \f0\fs40 \cf0 Functions documentation\
 
@@ -12,11 +12,11 @@
 
 \f1\b The big ones
 \f0\b0 \
-\pard\pardeftab720\sa120\partightenfactor0
+\pard\pardeftab720\sl360\slmult1\partightenfactor0
 
-\f2\fs21 \cf0 Q = myFFT(P, nm, dip, diam)
+\f2\fs21 \cf0 [Q, index, Q1, indextra, sec_max] = myFFT(P, nm, dip, diam, colorscale)
 \f0  \'97
-\f3\i  Q is the fft; P is the image; nm is the title; dip=[0.65 1] [optional] sets the limits of the colorbar where 1 is the value of the second highest peak; diam [optional] is the atom diameter which sets the maximum frequency for the low-pass filter\
+\f3\i  Q is the fft; index is the calculated Bragg wavevector; Q1 is the processed Q (linear or logarithmic abs()); indextra is the empirical wavevector; sec_max is the intensity of the empirical Bragg wavevector; P is the image; nm is the title; dip=[0.65 1] [optional] sets the limits of the colorbar where 1 is the value of the second highest peak; diam [optional] is the atom diameter which sets the maximum frequency for the low-pass filter; colorscale='logarithmic' [optional] specifies tbe scale of the colorbar display\
 
 \f2\i0 s = uCreate(h,l,diam,drift,hyst,creep)
 \f0  \'97
@@ -48,28 +48,28 @@
 \f3\i mu, sigma, are the mean and standard deviation of the relative magnitudes of u\'96ucalc; allzero is a string that warns for which all of u is zero and mu and sigma are not relative errors; u and ucalc are the vector fields to be compared; lamb is the coarsening factor in Lawler et al. (2010)'s supplementary information paper; z=2.58 [optional] is the zscore corresponding to the confidence level; fast=false [optional], replace with true to do a faster version of 
 \f2\i0 uCompare()
 \f3\i \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl360\slmult1\pardirnatural\partightenfactor0
 
-\f4\i0\fs20 \cf0 [fitresult, gof, output] = createFit(ucalcz, lamb, z) 
+\f4\i0\fs20 \cf0 [fitresult, gof, output] = createFit(ucalcz, lamb, z, variable, diam) 
 \f0\fs21 \'97 
 \f3\i fitresult,gpf, output are outputs of MATLAB's built-in 
 \f2\i0 fit()
-\f3\i  function; ucalcz is the scalar field to be fitted; lamb is in Lawler et al. (2010)'s supplementary information paper; z=2.58 [optional] is the zscore corresponding to the confidence level\
+\f3\i  function; ucalcz is the scalar field to be fitted; lamb is in Lawler et al. (2010)'s supplementary information paper; z=2.58 [optional] is the zscore corresponding to the confidence level; variable="poly33" [optional] can take any polynomial surface by MATLAB's fit or "x" or "y" for the custom equation fit; diam [optional] is the lattice constant\
 
 \f2\i0 [blat, mx, my] = imwarpConverse(lat,v,lambda,zscore)
 \f4\fs20  
 \f0\fs21 \'97 
 \f3\i blat is the undistorted lattice;, mx, my are the bounds of certainty; lat is the distorted lattice; v is the displacement field in terms of the coordinates of the distorted lattice; lambda [optional] is in Lawler et al. (2010)'s supplementary information paper; z [optional] is the zscore corresponding to the confidence \
 
-\f2\i0 ulattice = undistort(nlattice, ucalc, atom_diameter, lambda, zscore,nm1,nm2)
+\f2\i0 ulattice = undistort(nlattice, ucalc, atom_diameter, lambda, zscore, climits,cscale, nm1,nm2, linecuts)
 \f4\fs20  
 \f0\fs21 \'97 
-\f3\i ulattice is the distorted lattice cropped with the bounds of certainty; nlattice is the distorted lattice, ucalc is the displacement field in terms of the coordinates of the distorted lattice; atom_diameter is the lattice constant [pixel]; lambda [optional] is in Lawler et al. (2010)'s supplementary information paper; z [optional] is the zscore corresponding to the confidence; nm1, nm2 are titles of the plots
+\f3\i ulattice is the distorted lattice cropped with the bounds of certainty; nlattice is the distorted lattice, ucalc is the displacement field in terms of the coordinates of the distorted lattice; atom_diameter is the lattice constant [pixel]; lambda [optional] is in Lawler et al. (2010)'s supplementary information paper; zscore [optional] is the zscore corresponding to the confidence; climits=[] [optional, handled by myFFT()] sets the limits of the display [p_min*x p_max*x x]  or [p_min p_max]; cscale = "" [optional, handled by myFFT()] sets how Q is processed (linear or logarithmic abs()); nm1="undistorted", nm2="distorted and noisy (cropped)" [optional] are titles of the plots; linecults=false [optional], set to true to show linecuts along peaks
 \fs24 \
 \
-\pard\pardeftab720\sa120\partightenfactor0
+\pard\pardeftab720\sl360\slmult1\partightenfactor0
 \cf0 Optimized big ones\
-\pard\pardeftab720\sa120\partightenfactor0
+\pard\pardeftab720\sl360\slmult1\partightenfactor0
 
 \f2\i0\fs21 \cf0 blat = lawlerFujita(lat,qx,qy,lamb,z,fast)
 \f0  \'97 
@@ -82,11 +82,11 @@ Q = myFFTnp(P,diam)
 \f3\i  but without plotting\
 \
 \
-\pard\pardeftab720\sa120\partightenfactor0
+\pard\pardeftab720\sl360\slmult1\partightenfactor0
 
 \f1\i0\b\fs24 \cf0 Plotting
 \fs21 \
-\pard\pardeftab720\sa120\partightenfactor0
+\pard\pardeftab720\sl360\slmult1\partightenfactor0
 
 \f2\b0 \cf0 latticePlot(P0,nm1,r,num)
 \f0  \'97 
@@ -113,7 +113,7 @@ Q = myFFTnp(P,diam)
 \f3\i  h,l are matrix dimensions; z is intensity
 \f0\i0 ;
 \f3\i  it [optional] is the number of iterations; maxf [optional] is the maximum frequency\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl360\slmult1\pardirnatural\partightenfactor0
 
 \f2\i0 \cf0 fitPlot(fitresult, zData, nm, lamb, z) 
 \f0 \'97
@@ -122,25 +122,34 @@ Q = myFFTnp(P,diam)
 \f3\i ; zData is the "prepared" scalar field
 \f0\i0 ;
 \f3\i  nm is the title; lamb is in Lawler et al. (2010)'s supplementary information paper; z=2.58 [optional] is the zscore corresponding to the confidence level\
-\pard\pardeftab720\sa120\partightenfactor0
-\cf0 \
-\pard\pardeftab720\sa120\partightenfactor0
+\pard\pardeftab720\sl360\slmult1\partightenfactor0
+
+\f2\i0 \cf0 linecutPlot(values, index, direction, width)
+\f0  \'97
+\f3\i  values is the processed fft (linear or logarithmic abs()); index is the empirical Bragg wavevector; direction is either 'x' or 'y'; width=10 [optional] is the width of the linecut in pixels, the width of the displayed linecut is half this.\
+\
+\pard\pardeftab720\sl360\slmult1\partightenfactor0
 
 \f1\i0\b \cf0 Miscellaneous\
-\pard\pardeftab720\sa120\partightenfactor0
+\pard\pardeftab720\sl360\slmult1\partightenfactor0
 
 \f2\b0 \cf0 A = normies(A, lim)
 \f0  \'97
 \f3\i  A is the matrix; lim=[-1 1] [optional] are the limits\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl360\slmult1\pardirnatural\partightenfactor0
 
 \f2\i0 \cf0 z = zscorer(p)
 \f4\fs20  
 \f0\fs21 \'97
 \f3\i  z is the output zscore; p is the confidence level 0<=p<=1\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f2\i0 \cf0 opt_lambda = lambdaChoose(drift,hyst,creep,noise_minl,noise_mag,weights)
+\f2\i0 opt_lambda = lambdaChoose(drift,hyst,creep,noise_minl,noise_mag,weights)
 \f4\fs20  
 \f0\fs21 \'97
-\f3\i  opt_lambda is the chosen optimum lambda; drift, hyst, creep, noise_minl, noise_mag are distortion and noise parameters estimates; weights are the weights given to distortion, noise, and proportion of image left, respectively}
+\f3\i  opt_lambda is the chosen optimum lambda; drift, hyst, creep, noise_minl, noise_mag are distortion and noise parameters estimates; weights are the weights given to distortion, noise, and proportion of image left, respectively\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f2\i0 \cf0 [index, indextra] = findPeak(Q,cps)
+\f0  \'97
+\f3\i  index is the calculated Bragg wavevector; indextra is the empirical wavevector; Q is the processed fft (linear or logarithmic abs()); cps is the radius of the circle to mask out when looking for the Bragg peaks\
+}

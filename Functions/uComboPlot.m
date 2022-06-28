@@ -5,7 +5,7 @@ function uComboPlot(u,ucalc,lamb,z)
     subplot(2,2,2);
     uPlot(ucalc,"$u_{calc}$");
     subplot(2,2,3);
-    uPlot(ucalc-u,"$u-u_{calc}$");
+    uPlot(ucalc-u,"$u_{calc}-u$");
     subplot(2,2,4);
     colormap(jet);
     imagesc(sqrt(((ucalc(:,:,1)-u(:,:,1)).^2+(ucalc(:,:,2)-u(:,:,2)).^2)./(u(:,:,1).^2+u(:,:,2).^2)),[0.0001 1]);
@@ -21,7 +21,7 @@ function uComboPlot(u,ucalc,lamb,z)
         line([1+z 1+z], [1+z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
         line([h-z h-z], [1+z l-z], "LineWidth",1.5, "Color", "k", "LineStyle","--");
     end
-    title("The magnitude of $(u-u_{calc})/|u|$","Interpreter","latex");
+    title("The magnitude of $(u_{calc}-u)/|u|$","Interpreter","latex");
     xlabel("$x$ [pixel]","Interpreter","latex");
     ylabel("$y$ [pixel]","Interpreter","latex");
     set(gca, "ColorScale","log");

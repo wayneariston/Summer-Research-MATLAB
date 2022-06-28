@@ -1,7 +1,7 @@
 function blat = myConv(lat,qx,qy,lamb,z,~)
     blat = zeros(size(lat));
     sp = size(lat);
-    [x,y] = meshgrid(1:sp(2),1:sp(1));
+    [x,y] = meshgrid(0:sp(2)-1,0:sp(1)-1);
     
     % define the Gaussian
     G = fspecial('gaussian',[sp(1) sp(2)],1/lamb);

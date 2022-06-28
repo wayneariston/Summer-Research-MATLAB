@@ -24,6 +24,7 @@ function [fitresult, gof, output] = createFit(ucalcz, lamb, z, variable, diam)
         ft = fittype( variable );
         opts = fitoptions( 'Method', 'LinearLeastSquares' );
     else
+        disp("Doing custom equation fit pre-defined by the author.");
         t = "y+x/" + h;
         hyst_max = (1-exp(-1))*(log(1-exp(-1))+1)+2*exp(-1)-1; % for hyst exponent = 1
         if variable=="x"

@@ -18,6 +18,6 @@ function Q = myFFTnp(P,diam)
         sigma = [el 0; 0 eh];
         X = [x(:) y(:)];
         ellipse = reshape(mvnpdf(X,mu,sigma),sp(1),sp(2));
-        Q = fftshift(ellipse).*Q;
+        Q = Q.*fftshift(ellipse);
     end
 end
