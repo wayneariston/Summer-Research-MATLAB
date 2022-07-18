@@ -36,9 +36,10 @@ residue_charge_masked=residue_charge;
 residue_charge_masked(logical(~IM_mask))=0;         %Remove all residues except those in the mask
 [rowres,colres] = find(residue_charge_masked~=0);             %Find the coordinates of the residues
 if(isempty(rowres));
-  disp(['BranchCuts: No residues, length(rowres)=',int2str(length(rowres)),...
-    '; sum(abs(residue_charge))=',int2str(sum(abs(residue_charge(:)))),...
-    '; sum(abs(residue_charge_masked))=',int2str(sum(abs(residue_charge_masked(:))))])
+% BY WAYNE: uncomment if you want to monitor
+%   disp(['BranchCuts: No residues, length(rowres)=',int2str(length(rowres)),...
+%     '; sum(abs(residue_charge))=',int2str(sum(abs(residue_charge(:)))),...
+%     '; sum(abs(residue_charge_masked))=',int2str(sum(abs(residue_charge_masked(:))))])
   return;
 end                   % no residues
 

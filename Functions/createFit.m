@@ -1,9 +1,14 @@
-function [fitresult, gof, output] = createFit(ucalcz, lamb, z, variable, diam)
+function [fitresult, gof, output] = createFit(ucalcz, lamb, z, variable, diam, options)
+    arguments
+        ucalcz;
+        lamb = []; z = 2.58;
+        variable = []; diam = [];
+        options.rot_angle = 0;
+    end
+    ra = options.rot_angle;
+
     [h,l] = size(ucalcz);
-    if nargin>1 && ~isempty(lamb)
-        if nargin<3
-            z = 2.58; % to reduce the influence of edges with padded zeros in the mean difference
-        end
+    if ~isempty(lamb)
         z = ceil(z/lamb);
         ucalcz = ucalcz(1+z:h-z,1+z:l-z);
         xfit = z/l:1/l:(l-z-1)/l;
@@ -13,9 +18,12 @@ function [fitresult, gof, output] = createFit(ucalcz, lamb, z, variable, diam)
         yfit = 0:1/h:(h-1)/h;
     end
 
+    % prepare surface data
+    [xfit, yfit] = meshgrid(xfit,yfit);
+    [xfit, yfit] = rotateMeshgrid(xfit,yfit,ra);
     [xData, yData, zData] = prepareSurfaceData( xfit, yfit, ucalcz );
     
-    if nargin<4
+    if isempty(variable)
         disp("Doing polynomial fit using MATLAB's poly33.");
         ft = fittype( 'poly33' );
         opts = fitoptions( 'Method', 'LinearLeastSquares' );

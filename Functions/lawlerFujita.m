@@ -1,6 +1,6 @@
 function blat = lawlerFujita(lat,qx,qy,lamb,z,fast)
     sp = size(lat);
-    [x,y] = meshgrid(1:sp(2),1:sp(1));
+    [x,y] = meshgrid(0:sp(2)-1,0:sp(1)-1);
     
     if nargin>5
         if fast
